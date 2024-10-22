@@ -1,0 +1,67 @@
+name: Build & Deploy Server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  KillSocialServer:
+     name: Kill GCG Social Server
+     runs-on: ubuntu-latest
+     steps:
+     - name: Executing killall -q gcg-social-server
+       uses: appleboy/ssh-action@v1.1.0
+       with:
+          host: ${{ secrets.VPS1_HOST }}
+          username: ${{ secrets.VPS1_USERNAME }}
+          port: ${{ secrets.VPS1_PORT }}
+          key: ${{ secrets.VPS1_KEY }}
+          script: killall -q gcg-social-server
+  BuildAndDeploy:
+    needs: KillSocialServer
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [linux-server]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@f759ed7f8fcb5137cb70873ecf663aa8a1bd998b
+        with:
+          name: gcg-social-server
+          preset: ${{ matrix.platform }}
+          debugMode: "false"
+          projectDir: gcg-social-server
+      - name: Copy File to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS1_HOST }}
+          username: ${{ secrets.VPS1_USERNAME }}
+          port: ${{ secrets.VPS1_PORT }}
+          key: ${{ secrets.VPS1_KEY }}
+          source: ${{ github.workspace }}/${{ steps.build.outputs.build }}/gcg-social-server
+          target: /home/${{ secrets.VPS_USERNAME }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gcg-social-server
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+  StartSocialServer:
+     needs: [KillSocialServer, BuildAndDeploy]
+     name: Start GCG Social Server
+     runs-on: ubuntu-latest
+     steps:
+     - name: Starting Server
+       uses: appleboy/ssh-action@v1.1.0
+       with:
+          host: ${{ secrets.VPS1_HOST }}
+          username: ${{ secrets.VPS1_USERNAME }}
+          port: ${{ secrets.VPS1_PORT }}
+          key: ${{ secrets.VPS1_KEY }}
+          script: |
+            cd ~/github/workspace/build
+            chmod +x gcg-social-server
+            nohup ./gcg-social-server > /dev/null 2>&1 &
