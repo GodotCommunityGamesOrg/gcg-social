@@ -23,12 +23,10 @@ func setup_server_connection():
 	multiplayer_peer.peer_disconnected.connect(_on_client_disconnected)
 
 func _on_client_connected(new_peer_id : int) -> void:
-	await get_tree().create_timer(1).timeout
 	client_connected.emit(new_peer_id)
 	update_connection_buttons()
 
 func _on_client_disconnected(leaving_peer_id : int) -> void:
-	await get_tree().create_timer(1).timeout
 	client_disconnected.emit(leaving_peer_id)
 	update_connection_buttons()
 

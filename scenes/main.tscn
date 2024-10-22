@@ -11,12 +11,8 @@
 _spawnable_scenes = PackedStringArray("res://scenes/characters/player.tscn")
 spawn_path = NodePath("../Players")
 
-[node name="Players" type="Node" parent="." node_paths=PackedStringArray("starting_marker")]
+[node name="Players" type="Node" parent="."]
 script = ExtResource("3_81rha")
-starting_marker = NodePath("../Marker2D")
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(244.739, 174.958)
 
 [connection signal="client_connected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
 [connection signal="client_disconnected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
