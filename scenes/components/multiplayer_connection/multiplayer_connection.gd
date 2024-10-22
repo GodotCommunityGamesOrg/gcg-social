@@ -68,12 +68,11 @@ func update_connection_buttons() -> void:
 		disconnect_btn.disabled = false
 
 func _on_connect_btn_pressed() -> void:
-	var url = host_input.text
+	url = host_input.text
 	multiplayer_peer.create_client(url, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 	update_connection_buttons()
 
 func _on_disconnect_btn_pressed():
-	var peer_id = multiplayer_peer.get_unique_id()
 	multiplayer_peer.close()
 	update_connection_buttons()
