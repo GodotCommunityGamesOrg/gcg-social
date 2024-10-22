@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://cle6alqm1uehe"]
+
+[ext_resource type="Script" path="res://scenes/components/multiplayer_connection/multiplayer_connection.gd" id="1_22lmt"]
+
+[node name="MultiplayerConnection" type="Node"]
+script = ExtResource("1_22lmt")
+
+[node name="HostInput" type="TextEdit" parent="."]
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 216.0
+offset_bottom = 40.0
+text = "127.0.0.1"
+
+[node name="ConnectBtn" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 50.0
+offset_right = 105.0
+offset_bottom = 81.0
+text = "Connect
+"
+
+[node name="DisconnectBtn" type="Button" parent="."]
+offset_left = 121.0
+offset_top = 49.0
+offset_right = 215.0
+offset_bottom = 80.0
+text = "Disconnect"
+
+[connection signal="pressed" from="ConnectBtn" to="." method="_on_connect_btn_pressed"]
+[connection signal="pressed" from="DisconnectBtn" to="." method="_on_disconnect_btn_pressed"]
