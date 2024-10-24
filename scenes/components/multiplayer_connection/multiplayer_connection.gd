@@ -1,4 +1,4 @@
-extends Node
+extends Control
 class_name MultiplayerConnection
 
 ## [server only] Emitted when a client connects to the server
@@ -11,14 +11,15 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 var url: String = "127.0.0.1"
 const PORT: int = 9009
 
-@onready var host_input: TextEdit = $HostInput
-@onready var connect_btn: Button = $ConnectBtn
+@onready var host_input: TextEdit = $Connect/HostInput
+@onready var connect_btn: Button = $Connect/ConnectBtn
 @onready var disconnect_btn: Button = $DisconnectBtn
 
 func _ready() -> void:
 	update_connection_buttons()
 	if OS.has_feature("is_server"):
 		setup_server_connection()
+		$Connect.hide()
 	else:
 		setup_client_connection()
 
@@ -70,12 +71,14 @@ func update_connection_buttons() -> void:
 		return
 	
 	if multiplayer_peer.get_connection_status() == multiplayer_peer.CONNECTION_DISCONNECTED:
+		$Connect.show()
 		connect_btn.disabled = false
 		disconnect_btn.disabled = true
 	if multiplayer_peer.get_connection_status() == multiplayer_peer.CONNECTION_CONNECTING:
 		connect_btn.disabled = true
 		disconnect_btn.disabled = true
 	if multiplayer_peer.get_connection_status() == multiplayer_peer.CONNECTION_CONNECTED:
+		$Connect.hide()
 		connect_btn.disabled = true
 		disconnect_btn.disabled = false
 
