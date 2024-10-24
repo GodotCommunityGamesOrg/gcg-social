@@ -6,7 +6,9 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="MultiplayerConnection" parent="." instance=ExtResource("3_qakxp")]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MultiplayerConnection" parent="HUD" instance=ExtResource("3_qakxp")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/characters/player.tscn")
@@ -25,14 +27,14 @@ position = Vector2(636, 231)
 scale = Vector2(-0.719015, 19.8856)
 
 [node name="Wall3" parent="." instance=ExtResource("3_8g0g3")]
-position = Vector2(382, 422)
-rotation = 1.5697
-scale = Vector2(-0.719015, 24.806)
+position = Vector2(385, 422)
+rotation = 1.5708
+scale = Vector2(-0.72, 24.84)
 
 [node name="Wall4" parent="." instance=ExtResource("3_8g0g3")]
 position = Vector2(382, 40)
 rotation = 1.5697
 scale = Vector2(-0.719015, 24.806)
 
-[connection signal="client_connected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
-[connection signal="client_disconnected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
+[connection signal="client_connected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
+[connection signal="client_disconnected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
