@@ -1,51 +1,65 @@
 extends Node
+class_name MultiplayerConnection
 
+## [server only] Emitted when a client connects to the server
 signal client_connected(peer_id: int)
+
+## [server only] Emitted when a client disconnects from the server
 signal client_disconnected(peer_id: int)
-@onready var host_input: TextEdit = $HostInput
-@onready var connect_btn: Button = $ConnectBtn
-@onready var disconnect_btn: Button = $DisconnectBtn
+
 var multiplayer_peer = ENetMultiplayerPeer.new()
 var url: String = "127.0.0.1"
 const PORT: int = 9009
 
-func _ready():
+@onready var host_input: TextEdit = $HostInput
+@onready var connect_btn: Button = $ConnectBtn
+@onready var disconnect_btn: Button = $DisconnectBtn
+
+func _ready() -> void:
 	update_connection_buttons()
 	if OS.has_feature("is_server"):
 		setup_server_connection()
 	else:
 		setup_client_connection()
 
-func setup_server_connection():
+## [server only] Sets up the Multiplayer Server
+func setup_server_connection() -> void:
 	multiplayer_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 	multiplayer_peer.peer_connected.connect(_on_client_connected)
 	multiplayer_peer.peer_disconnected.connect(_on_client_disconnected)
 
+## [server only] Called on the server when a client connects to the server
 func _on_client_connected(new_peer_id : int) -> void:
 	client_connected.emit(new_peer_id)
 	update_connection_buttons()
 
+## [server only] Called on the server when a client disconnects from the server
 func _on_client_disconnected(leaving_peer_id : int) -> void:
 	client_disconnected.emit(leaving_peer_id)
 	update_connection_buttons()
 
-func setup_client_connection():
+## [client only] Sets up the Multiplayer Client
+func setup_client_connection() -> void:
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-func _on_connected_to_server():
+## [client only] Called on the client when it connects to the server
+func _on_connected_to_server() -> void:
 	if OS.has_feature("is_server"):
 		return
 	update_connection_buttons()
 
-func _on_server_disconnected():
+## [client only] Called on the client when it disconnects from the server
+func _on_server_disconnected() -> void:
 	if OS.has_feature("is_server"):
 		return
 	multiplayer_peer.close()
 	update_connection_buttons()
 
+## Updates the connection UI based on the connection status
 func update_connection_buttons() -> void:
+	# if this is the server we don't need to show any connection UI
 	if OS.has_feature("is_server"):
 		host_input.text = "I'm a dedicated server. Ignore me!"
 		host_input.hide()
@@ -65,12 +79,14 @@ func update_connection_buttons() -> void:
 		connect_btn.disabled = true
 		disconnect_btn.disabled = false
 
+## [client only] Called on the client when the connect button is pressed
 func _on_connect_btn_pressed() -> void:
 	url = host_input.text
 	multiplayer_peer.create_client(url, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 	update_connection_buttons()
 
-func _on_disconnect_btn_pressed():
+## [client only] Called on the client when the disconnect button is pressed
+func _on_disconnect_btn_pressed() -> void:
 	multiplayer_peer.close()
 	update_connection_buttons()
