@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwajhddpq8f51"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_q4mfh"]
+[ext_resource type="LabelSettings" uid="uid://d4anjv50q126s" path="res://assets/labels/title.tres" id="2_4bfu7"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8u72y"]
+
+[sub_resource type="GDScript" id="GDScript_08a3e"]
+resource_name = "Exit"
+script/source = "extends Button
+
+## Just quits the game.
+func _on_pressed() -> void:
+	get_tree().quit()
+	pass
+"
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4mfh")
+
+[node name="MenuBackground" type="TextureRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_8u72y")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -20.0
+offset_right = 42.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+text = "gcg-social"
+label_settings = ExtResource("2_4bfu7")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Buttons" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+alignment = 1
+
+[node name="Pad" type="Control" parent="Content/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Connect" type="Button" parent="Content/Buttons"]
+layout_mode = 2
+text = "Connect
+"
+
+[node name="Pad2" type="Control" parent="Content/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Options" type="Button" parent="Content/Buttons"]
+layout_mode = 2
+text = "Options"
+
+[node name="Pad3" type="Control" parent="Content/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Credits" type="Button" parent="Content/Buttons"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Pad4" type="Control" parent="Content/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="Content/Buttons"]
+layout_mode = 2
+text = "Exit
+"
+script = SubResource("GDScript_08a3e")
+
+[node name="Pad5" type="Control" parent="Content/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="Content/Buttons/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="Content/Buttons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Content/Buttons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Content/Buttons/Exit" to="Content/Buttons/Exit" method="_on_pressed"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnmgufd7m2y27"]
+
+[ext_resource type="Script" path="res://scenes/ui/credits_menu.gd" id="1_fdeba"]
+[ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="2_8j8hf"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8u72y"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fdeba")
+
+[node name="MenuBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_8u72y")
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -48.0
+offset_right = -11.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
+[node name="Credits" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -75.0
+offset_right = 122.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="Credits"]
+layout_mode = 2
+text = "Credits"
+label_settings = ExtResource("2_8j8hf")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Credits"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="ContributorsLink" type="LinkButton" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "See List of Contributors"
+underline = 1
+uri = "https://github.com/Godot-Community-Games-Org/gcg-social/graphs/contributors"
+
+[node name="3rdPartyLicenseLink" type="LinkButton" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "3rd Party License Information"
+underline = 1
+uri = "https://github.com/Godot-Community-Games-Org/gcg-social/blob/main/THIRD_PARTY.md"
+
+[node name="Spacer2" type="Control" parent="Credits"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Socials" type="Label" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Socials:"
+
+[node name="SocialLinks" type="HBoxContainer" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Discord" type="LinkButton" parent="Credits/SocialLinks"]
+layout_mode = 2
+text = "Discord"
+
+[node name="GitHub" type="LinkButton" parent="Credits/SocialLinks"]
+layout_mode = 2
+text = "GitHub"
+
+[node name="Spacer3" type="Control" parent="Credits"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="SourceCodes" type="LinkButton" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "See Source Code"
+uri = "https://github.com/Godot-Community-Games-Org/gcg-social"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

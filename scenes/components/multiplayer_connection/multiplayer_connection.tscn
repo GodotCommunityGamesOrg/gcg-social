@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cle6alqm1uehe"]
+[gd_scene load_steps=4 format=3 uid="uid://cle6alqm1uehe"]
 
 [ext_resource type="Script" path="res://scenes/components/multiplayer_connection/multiplayer_connection.gd" id="1_22lmt"]
+[ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="2_lhu3x"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ccth6"]
 
 [node name="MultiplayerConnection" type="Control"]
 layout_mode = 3
@@ -13,43 +16,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_22lmt")
 
-[node name="Connect" type="HBoxContainer" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -178.5
-offset_top = -17.5
-offset_right = 178.5
-offset_bottom = 17.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="ServerIP" type="Label" parent="Connect"]
-layout_mode = 2
-text = "Server IP:"
-
-[node name="HostInput" type="TextEdit" parent="Connect"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "127.0.0.1"
-placeholder_text = "SERVER_IP"
-scroll_fit_content_height = true
-
-[node name="Spacer" type="Control" parent="Connect"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-
-[node name="ConnectBtn" type="Button" parent="Connect"]
-layout_mode = 2
-text = "Connect
-"
+texture = SubResource("PlaceholderTexture2D_ccth6")
 
 [node name="DisconnectBtn" type="Button" parent="."]
 layout_mode = 1
@@ -66,5 +40,63 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Disconnect"
 
-[connection signal="pressed" from="Connect/ConnectBtn" to="." method="_on_connect_btn_pressed"]
+[node name="Connect" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -17.5
+offset_right = 178.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConnectLabel" type="Label" parent="Connect"]
+layout_mode = 2
+text = "Connect to a Server"
+label_settings = ExtResource("2_lhu3x")
+horizontal_alignment = 1
+
+[node name="Details" type="HBoxContainer" parent="Connect"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ServerIP" type="Label" parent="Connect/Details"]
+layout_mode = 2
+text = "Server IP:"
+
+[node name="HostInput" type="TextEdit" parent="Connect/Details"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "127.0.0.1"
+placeholder_text = "SERVER_IP"
+scroll_fit_content_height = true
+
+[node name="Buttons" type="HBoxContainer" parent="Connect"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ConnectBtn" type="Button" parent="Connect/Buttons"]
+layout_mode = 2
+text = "Connect
+"
+
+[node name="Spacer" type="Control" parent="Connect/Buttons"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="Back" type="Button" parent="Connect/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
 [connection signal="pressed" from="DisconnectBtn" to="." method="_on_disconnect_btn_pressed"]
+[connection signal="pressed" from="Connect/Buttons/ConnectBtn" to="." method="_on_connect_btn_pressed"]
+[connection signal="pressed" from="Connect/Buttons/Back" to="." method="_on_back_pressed"]

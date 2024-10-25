@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://pbkkshamsp7j"]
+
+[ext_resource type="FontFile" uid="uid://crk5y1l3oi0qd" path="res://assets/fonts/nunito/Nunito.ttf" id="1_yhhvd"]
+
+[resource]
+font = ExtResource("1_yhhvd")
+font_size = 32
+outline_size = 5
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)

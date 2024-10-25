@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://b571wyts626or"]
+
+[ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_ggwvl"]
+[ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="2_qgasu"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rfx17"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ggwvl")
+
+[node name="MenuBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_rfx17")
+
+[node name="OPTIONS_TEST" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 111.0
+offset_bottom = 23.0
+text = "OPTIONS TEST"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -48.0
+offset_right = -11.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
+[node name="Options" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -20.0
+offset_right = 133.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="Options"]
+layout_mode = 2
+text = "Options"
+label_settings = ExtResource("2_qgasu")
+horizontal_alignment = 1
+
+[node name="Snap2DTransformPixel" type="CheckButton" parent="Options"]
+layout_mode = 2
+text = "Snap 2D Transforms to Pixel"
+autowrap_mode = 3
+
+[node name="VSync" type="CheckButton" parent="Options"]
+layout_mode = 2
+text = "Enable VSync"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="toggled" from="Options/Snap2DTransformPixel" to="." method="_on_snap_2d_transform_pixel_toggled"]
+[connection signal="toggled" from="Options/VSync" to="." method="_on_v_sync_toggled"]

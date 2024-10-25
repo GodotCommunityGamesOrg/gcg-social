@@ -1,14 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://4intjybpv5s6"]
+[gd_scene load_steps=10 format=3 uid="uid://4intjybpv5s6"]
 
+[ext_resource type="PackedScene" uid="uid://dwajhddpq8f51" path="res://scenes/ui/main_menu.tscn" id="2_qyefe"]
 [ext_resource type="PackedScene" uid="uid://cudifpbd7u4hu" path="res://scenes/components/wall/wall.tscn" id="3_8g0g3"]
 [ext_resource type="Script" path="res://scenes/players.gd" id="3_81rha"]
+[ext_resource type="PackedScene" uid="uid://b571wyts626or" path="res://scenes/ui/options_menu.tscn" id="3_f7tt1"]
 [ext_resource type="PackedScene" uid="uid://cle6alqm1uehe" path="res://scenes/components/multiplayer_connection/multiplayer_connection.tscn" id="3_qakxp"]
+[ext_resource type="PackedScene" uid="uid://bnmgufd7m2y27" path="res://scenes/ui/credits_menu.tscn" id="4_b63uw"]
+[ext_resource type="FontFile" uid="uid://crk5y1l3oi0qd" path="res://assets/fonts/nunito/Nunito.ttf" id="5_6g78f"]
+[ext_resource type="Script" path="res://scenes/kill_server.gd" id="6_6uen7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1aih0"]
+font = ExtResource("5_6g78f")
+font_size = 24
+outline_size = 5
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="MultiplayerConnection" parent="HUD" instance=ExtResource("3_qakxp")]
+
+[node name="MainMenu" parent="HUD" instance=ExtResource("2_qyefe")]
+
+[node name="OptionsMenu" parent="HUD" instance=ExtResource("3_f7tt1")]
+visible = false
+
+[node name="CreditsMenu" parent="HUD" instance=ExtResource("4_b63uw")]
+visible = false
+
+[node name="ServerLabel" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -81.5
+offset_top = -23.0
+offset_right = 81.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "< # - SERVER INSTANCE - # >"
+label_settings = SubResource("LabelSettings_1aih0")
+
+[node name="Kill Server" type="Button" parent="HUD/ServerLabel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_top = -32.0
+offset_right = 43.0
+offset_bottom = -1.0
+grow_horizontal = 2
+text = "Kill Server"
+script = ExtResource("6_6uen7")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/characters/player.tscn")
@@ -38,3 +86,4 @@ scale = Vector2(-0.719015, 24.806)
 
 [connection signal="client_connected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
 [connection signal="client_disconnected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
+[connection signal="pressed" from="HUD/ServerLabel/Kill Server" to="HUD/ServerLabel/Kill Server" method="_on_pressed"]
