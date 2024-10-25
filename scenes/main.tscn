@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://4intjybpv5s6"]
+[gd_scene load_steps=4 format=3 uid="uid://4intjybpv5s6"]
 
+[ext_resource type="PackedScene" uid="uid://cudifpbd7u4hu" path="res://scenes/components/wall/wall.tscn" id="3_8g0g3"]
 [ext_resource type="Script" path="res://scenes/players.gd" id="3_81rha"]
 [ext_resource type="PackedScene" uid="uid://cle6alqm1uehe" path="res://scenes/components/multiplayer_connection/multiplayer_connection.tscn" id="3_qakxp"]
 
 [node name="Main" type="Node2D"]
 
-[node name="MultiplayerConnection" parent="." instance=ExtResource("3_qakxp")]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MultiplayerConnection" parent="HUD" instance=ExtResource("3_qakxp")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/characters/player.tscn")
 spawn_path = NodePath("../Players")
 
-[node name="Players" type="Node" parent="."]
+[node name="Players" type="Marker2D" parent="."]
+position = Vector2(342, 133)
 script = ExtResource("3_81rha")
 
-[connection signal="client_connected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
-[connection signal="client_disconnected" from="MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
+[node name="Wall" parent="." instance=ExtResource("3_8g0g3")]
+position = Vector2(128, 231)
+scale = Vector2(-0.719015, 19.8856)
+
+[node name="Wall2" parent="." instance=ExtResource("3_8g0g3")]
+position = Vector2(636, 231)
+scale = Vector2(-0.719015, 19.8856)
+
+[node name="Wall3" parent="." instance=ExtResource("3_8g0g3")]
+position = Vector2(385, 422)
+rotation = 1.5708
+scale = Vector2(-0.72, 24.84)
+
+[node name="Wall4" parent="." instance=ExtResource("3_8g0g3")]
+position = Vector2(382, 40)
+rotation = 1.5697
+scale = Vector2(-0.719015, 24.806)
+
+[connection signal="client_connected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
+[connection signal="client_disconnected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
