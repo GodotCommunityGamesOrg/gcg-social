@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6kl8l4glgkxe"]
+
+[ext_resource type="Script" path="res://scenes/ui/player_login/player_login.gd" id="1_a0y8u"]
+[ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="1_op8eb"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kkhuv"]
+
+[sub_resource type="FontVariation" id="FontVariation_w1m5d"]
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhuei"]
+font = SubResource("FontVariation_w1m5d")
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fr137"]
+
+[node name="PlayerLogin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a0y8u")
+
+[node name="MenuBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_kkhuv")
+
+[node name="Login" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -20.0
+offset_right = 133.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="Login"]
+layout_mode = 2
+text = "Login"
+label_settings = ExtResource("1_op8eb")
+horizontal_alignment = 1
+
+[node name="ErrorMessage" type="Label" parent="Login"]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_dhuei")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Login"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="UsernameLine" type="HBoxContainer" parent="Login/MarginContainer"]
+layout_mode = 2
+
+[node name="UsernameLabel" type="Label" parent="Login/MarginContainer/UsernameLine"]
+layout_mode = 2
+text = "Username:"
+label_settings = SubResource("LabelSettings_fr137")
+horizontal_alignment = 1
+
+[node name="UsernameInput" type="LineEdit" parent="Login/MarginContainer/UsernameLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Login"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="PasswordLine" type="HBoxContainer" parent="Login/MarginContainer2"]
+layout_mode = 2
+
+[node name="PasswordLabel" type="Label" parent="Login/MarginContainer2/PasswordLine"]
+layout_mode = 2
+text = "Password: "
+label_settings = SubResource("LabelSettings_fr137")
+horizontal_alignment = 1
+
+[node name="PasswordInput" type="LineEdit" parent="Login/MarginContainer2/PasswordLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+secret = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="Login"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="LoginBtn" type="Button" parent="Login/MarginContainer3"]
+layout_mode = 2
+text = "Join"
+
+[connection signal="text_changed" from="Login/MarginContainer/UsernameLine/UsernameInput" to="." method="_on_username_input_text_changed"]
+[connection signal="pressed" from="Login/MarginContainer3/LoginBtn" to="." method="_on_login_btn_pressed"]

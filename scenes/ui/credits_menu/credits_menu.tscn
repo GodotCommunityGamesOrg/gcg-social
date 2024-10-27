@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnmgufd7m2y27"]
 
-[ext_resource type="Script" path="res://scenes/ui/credits_menu.gd" id="1_fdeba"]
+[ext_resource type="Script" path="res://scenes/ui/credits_menu/credits_menu.gd" id="1_fdeba"]
 [ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="2_8j8hf"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8u72y"]

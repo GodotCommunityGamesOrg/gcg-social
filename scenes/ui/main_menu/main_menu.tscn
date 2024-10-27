@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwajhddpq8f51"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_q4mfh"]
+[ext_resource type="Script" path="res://scenes/ui/main_menu/main_menu.gd" id="1_q4mfh"]
 [ext_resource type="LabelSettings" uid="uid://d4anjv50q126s" path="res://assets/labels/title.tres" id="2_4bfu7"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8u72y"]
@@ -64,7 +64,7 @@ size_flags_horizontal = 3
 
 [node name="Connect" type="Button" parent="Content/Buttons"]
 layout_mode = 2
-text = "Connect
+text = "Login
 "
 
 [node name="Pad2" type="Control" parent="Content/Buttons"]

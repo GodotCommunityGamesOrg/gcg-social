@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b571wyts626or"]
 
-[ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_ggwvl"]
+[ext_resource type="Script" path="res://scenes/ui/options_menu/options_menu.gd" id="1_ggwvl"]
 [ext_resource type="LabelSettings" uid="uid://pbkkshamsp7j" path="res://assets/labels/menu_headers.tres" id="2_qgasu"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rfx17"]

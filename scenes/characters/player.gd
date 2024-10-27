@@ -4,6 +4,11 @@ class_name Player
 ## The speed of the player
 @export var SPEED = 300.0
 
+const ZOOMING_CAMERA_FACTORY = preload("res://scenes/components/zooming_camera/zooming_camera.tscn")
+
+## The player's username
+var username: String = "username"
+
 func _ready() -> void:
 	give_control_to_the_proper_client()
 	if this_is_my_player():
@@ -28,12 +33,18 @@ func this_is_my_player() -> bool:
 func give_control_to_the_proper_client() -> void:
 	var peer_id = get_peer_id()
 	set_multiplayer_authority(peer_id) # Setting the multiplayer authority tells the engine which peer is in charge of this node
-
+	$Username.set_multiplayer_authority(1) # Setting the multiplayer authority to 1 lets the server be in charge of the label
+	
 ## Adds a camera 2D to this player
 func follow_it_with_a_camera() -> void:
-	var camera = Camera2D.new()
+	var camera = ZOOMING_CAMERA_FACTORY.instantiate()
 	add_child(camera)
 
 ## Destroys this player
 func eat_me() -> void:
 	queue_free()
+
+## Sets the player's username
+func set_username(_username: String) -> void:
+	username = _username
+	$Username.text = _username

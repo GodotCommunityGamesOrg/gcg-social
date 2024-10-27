@@ -4,7 +4,6 @@ extends Control
 @onready var snap_transform_pixel: CheckButton = $Options/Snap2DTransformPixel
 @onready var v_sync_toggle: CheckButton = $Options/VSync
 
-
 func _ready() -> void:
 	# initialize button states
 	var snap_2d_pixel_state : bool = ProjectSettings.get_setting("rendering/2d/snap/snap_2d_transforms_to_pixel")

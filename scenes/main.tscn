@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://4intjybpv5s6"]
+[gd_scene load_steps=11 format=3 uid="uid://4intjybpv5s6"]
 
-[ext_resource type="PackedScene" uid="uid://dwajhddpq8f51" path="res://scenes/ui/main_menu.tscn" id="2_qyefe"]
+[ext_resource type="PackedScene" uid="uid://b6kl8l4glgkxe" path="res://scenes/ui/player_login/player_login.tscn" id="1_fibsc"]
+[ext_resource type="PackedScene" uid="uid://dwajhddpq8f51" path="res://scenes/ui/main_menu/main_menu.tscn" id="2_qyefe"]
 [ext_resource type="PackedScene" uid="uid://cudifpbd7u4hu" path="res://scenes/components/wall/wall.tscn" id="3_8g0g3"]
 [ext_resource type="Script" path="res://scenes/players.gd" id="3_81rha"]
-[ext_resource type="PackedScene" uid="uid://b571wyts626or" path="res://scenes/ui/options_menu.tscn" id="3_f7tt1"]
+[ext_resource type="PackedScene" uid="uid://b571wyts626or" path="res://scenes/ui/options_menu/options_menu.tscn" id="3_f7tt1"]
 [ext_resource type="PackedScene" uid="uid://cle6alqm1uehe" path="res://scenes/components/multiplayer_connection/multiplayer_connection.tscn" id="3_qakxp"]
-[ext_resource type="PackedScene" uid="uid://bnmgufd7m2y27" path="res://scenes/ui/credits_menu.tscn" id="4_b63uw"]
-[ext_resource type="FontFile" uid="uid://crk5y1l3oi0qd" path="res://assets/fonts/nunito/Nunito.ttf" id="5_6g78f"]
+[ext_resource type="PackedScene" uid="uid://bnmgufd7m2y27" path="res://scenes/ui/credits_menu/credits_menu.tscn" id="4_b63uw"]
+[ext_resource type="FontFile" uid="uid://d161yog70v2t" path="res://assets/fonts/nunito/Nunito.ttf" id="5_6g78f"]
 [ext_resource type="Script" path="res://scenes/kill_server.gd" id="6_6uen7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1aih0"]
@@ -19,6 +20,8 @@ shadow_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node2D"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerLogin" parent="HUD" instance=ExtResource("1_fibsc")]
 
 [node name="MultiplayerConnection" parent="HUD" instance=ExtResource("3_qakxp")]
 
@@ -84,6 +87,8 @@ position = Vector2(382, 40)
 rotation = 1.5697
 scale = Vector2(-0.719015, 24.806)
 
-[connection signal="client_connected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_connected"]
+[connection signal="username_requested" from="HUD/PlayerLogin" to="Players" method="_on_player_login_username_requested"]
 [connection signal="client_disconnected" from="HUD/MultiplayerConnection" to="Players" method="_on_multiplayer_connection_client_disconnected"]
 [connection signal="pressed" from="HUD/ServerLabel/Kill Server" to="HUD/ServerLabel/Kill Server" method="_on_pressed"]
+[connection signal="username_available" from="Players" to="HUD/PlayerLogin" method="_on_players_username_available"]
+[connection signal="username_unavailable" from="Players" to="HUD/PlayerLogin" method="_on_players_username_unavailable"]

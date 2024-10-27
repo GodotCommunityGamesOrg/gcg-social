@@ -15,6 +15,7 @@ const PORT: int = 9009
 @onready var connect_btn: Button = $Connect/Buttons/ConnectBtn
 @onready var disconnect_btn: Button = $DisconnectBtn
 @onready var main_menu: Control = $"../MainMenu"
+@onready var player_login_ui: Control = $"../PlayerLogin"
 @onready var server_label: Label = $"../ServerLabel"
 @onready var back: Button = $Connect/Buttons/Back
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 		$Connect.hide()
 		$Background.hide()
 		main_menu.hide()
+		player_login_ui.hide()
 		server_label.show()
 	else:
 		setup_client_connection()
@@ -55,6 +57,7 @@ func setup_client_connection() -> void:
 func _on_connected_to_server() -> void:
 	if OS.has_feature("is_server"):
 		return
+	hide()
 	update_connection_buttons()
 
 ## [client only] Called on the client when it disconnects from the server
@@ -105,7 +108,6 @@ func _on_disconnect_btn_pressed() -> void:
 	multiplayer_peer.close()
 	main_menu.show()
 	update_connection_buttons()
-
 
 func _on_back_pressed() -> void:
 	main_menu.show()
