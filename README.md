@@ -10,8 +10,8 @@
   - This instance will act as the dedicated server when running locally
 - Run the project
 - Three windows should open
-  - Two of the windows will have an input box, a Connect, and a Disconnect button
-  - The last one will now (this is the Dedicated Server)
-- Press Connect in both of the clients that have a Connect button
+  - Two of the windows will have a main menu screen
+  - The last one will not (this is the Dedicated Server)
+- Press Login in both of the clients, connect, and choose a username
 - That's it! Move around with WASD.
 
