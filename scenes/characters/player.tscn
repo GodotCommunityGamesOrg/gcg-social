@@ -32,6 +32,7 @@ shape = SubResource("RectangleShape2D_55toe")
 replication_config = SubResource("SceneReplicationConfig_o4u40")
 
 [node name="Username" type="Label" parent="."]
+z_index = 50
 offset_left = -39.0
 offset_top = 26.0
 offset_right = 41.0
