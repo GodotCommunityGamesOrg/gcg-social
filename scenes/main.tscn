@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b571wyts626or" path="res://scenes/ui/options_menu/options_menu.tscn" id="3_f7tt1"]
 [ext_resource type="PackedScene" uid="uid://cle6alqm1uehe" path="res://scenes/components/multiplayer_connection/multiplayer_connection.tscn" id="3_qakxp"]
 [ext_resource type="PackedScene" uid="uid://bnmgufd7m2y27" path="res://scenes/ui/credits_menu/credits_menu.tscn" id="4_b63uw"]
-[ext_resource type="FontFile" uid="uid://d161yog70v2t" path="res://assets/fonts/nunito/Nunito.ttf" id="5_6g78f"]
+[ext_resource type="FontFile" uid="uid://dcdq78lly44xv" path="res://assets/fonts/nunito/Nunito.ttf" id="5_6g78f"]
 [ext_resource type="Script" path="res://scenes/kill_server.gd" id="6_6uen7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1aih0"]
